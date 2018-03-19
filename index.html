@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!--1.添加视口标签:  meta:vp-->
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <!--2.设置浏览器渲染模式为最新浏览器标准 meta:compat-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <!--3.引入bootstrap 框架 中的css 文件-->
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <!--4.引入自己写的css 文件-->
+    <style>
+        @media (max-width: 768px) {
+            #myul{
+                position: absolute;
+                top: 0;
+                left: 50%;
+            }
+            #myul li{
+                float: left;
+            }
+        }
+        .panel-footer p{
+            color: #ccc;
+        }
+        #confirmModal .modal-footer{
+            text-align: center;
+        }
+        #confirmModal .modal-footer .alert{
+            padding: 5px;
+        }
+    </style>
+    <!--兼容IE 8写法 快捷键 cc:ie ,为了兼容IE8 不支持HTML5的新标签，不支持媒体查询-->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <!--导航条头部：主要放 logo 和 汉堡按钮-->
+        <div class="navbar-header">
+            <a href=""><img src="images/logo.png" alt=""/></a>
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!--导航部分-->
+        <div class="navbar-collapse collapse navbar-left">
+            <ul class="navbar-nav nav">
+                <li><a href="">首页</a></li>
+                <li><a href="">入门课</a></li>
+                <li><a href="">岗位课</a></li>
+                <li><a href="">技能库</a></li>
+                <li><a href="">微社区</a></li>
+                <li><a href="">学员 <span class="label label-danger">new</span></a></li>
+            </ul>
+        </div>
+        <!--搜索表单-->
+        <form action="" class="navbar-form navbar-right visible-lg-block">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="请输入您要搜索的内容..."/>
+                <div class="input-group-btn">
+                    <button class="btn btn-success">搜索</button>
+                </div>
+            </div>
+
+        </form>
+
+        <!--登录 、 注册-->
+        <ul class="navbar-nav nav navbar-right" id="myul">
+            <li><a href="">登录</a></li>
+            <li><a href="">注册</a></li>
+        </ul>
+
+    </div>
+</header>
+<!--内容主体-->
+<div class="container" style="padding-top: 50px;">
+    <div class="panel panel-primary">
+        <!--面板头部-->
+        <div class="panel-heading">
+            <h2>课工场学员管理系统 <button class="btn btn-warning pull-right" data-toggle="modal" data-target="#addModal">增加记录 <span class="glyphicon glyphicon-plus"></span></button></h2>
+        </div>
+        <!--面板主体-->
+        <div class="panel-body">
+        <table class="table table-bordered table-striped table-hover" id="studentList">
+            <thead>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>专业</th>
+            <th>班级</th>
+            <th>学号</th>
+            <th>操作</th>
+            </thead>
+            <tbody></tbody>
+        </table>
+        </div>
+        <!--面板底部-->
+        <div class="panel-footer">
+            <p class="text-center">&copy; WT12 版权所有 Version 1.0</p>
+        </div>
+    </div>
+</div>
+<!--定义一个添加学员信息模态框-->
+<div class="modal fade" id="addModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>添加学员信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="addForm">
+                    <div class="form-group clearfix">
+                        <label for="" class="control-label col-md-3 text-right">姓名：</label>
+                        <div class="col-md-8">
+                            <input type="text" name="name" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="" class="control-label col-md-3 text-right">性别：</label>
+                        <div class="col-md-8">
+                            <input type="radio" name="sex" value="1"/> 男
+                            <input type="radio" name="sex" value="0"/> 女
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="" class="control-label col-md-3 text-right">专业：</label>
+                        <div class="col-md-8">
+                            <input type="text" name="pro" class="form-control"value="web前端工程师"/>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="" class="control-label col-md-3 text-right">学号：</label>
+                        <div class="col-md-8">
+                            <input type="text" name="number" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="" class="control-label col-md-3 text-right">班级：</label>
+                        <div class="col-md-8">
+                            <input type="text" name="class" class="form-control" value="WT12"/>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="" class="control-label col-md-3 text-right">备注：</label>
+                        <div class="col-md-8">
+                            <textarea name="txt" id="" cols="30" rows="10" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p class="text-center">
+                    <button class="btn btn-success" id="addSubmit">添加学员</button>
+                    <button class="btn btn-danger" data-dismiss="modal">关闭</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--定义一个查看学员信息模态框-->
+<div class="modal fade" id="showModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>学员信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="showForm">
+                    <div class="form-group clearfix">
+                        <label for="" class="control-label col-md-3 text-right">编号：</label>
+                        <div class="col-md-8">
+                            <input type="text" name="id" class="form-control" readonly/>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="" class="control-label col-md-3 text-right">姓名：</label>
+                        <div class="col-md-8">
+                            <input type="text" name="name" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="" class="control-label col-md-3 text-right">性别：</label>
+                        <div class="col-md-8">
+                            <input type="radio" name="sex" value="1"/> 男
+                            <input type="radio" name="sex" value="0"/> 女
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="" class="control-label col-md-3 text-right">专业：</label>
+                        <div class="col-md-8">
+                            <input type="text" name="pro" class="form-control"value="web前端工程师"/>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="" class="control-label col-md-3 text-right">学号：</label>
+                        <div class="col-md-8">
+                            <input type="text" name="number" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="" class="control-label col-md-3 text-right">班级：</label>
+                        <div class="col-md-8">
+                            <input type="text" name="class" class="form-control" value="WT12"/>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="" class="control-label col-md-3 text-right">备注：</label>
+                        <div class="col-md-8">
+                            <textarea name="txt" cols="30" rows="10" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p class="text-center">
+                    <button class="btn btn-success" id="showSubmit">保存信息</button>
+                    <button class="btn btn-danger" data-dismiss="modal">关闭</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--定义一个确认模态框-->
+<div class="modal fade" id="confirmModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h5>删除确认</h5>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <p class="text-center">
+                    <button class="btn btn-success" data-dismiss="modal">取消</button>
+                    <button class="btn btn-danger" id="delete">确定</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--5.引入jQuery文件, jQuery 版本必须为 1.10.*+ 以上版本-->
+<script src="js/jquery-1.10.2.min.js"></script>
+<!--6.引入bootstrap框架中的插件-->
+<script src="js/bootstrap.min.js"></script>
+<!--7.自己调用的js文件-->
+<script src="js/index.js"></script>
+</body>
+</html>
